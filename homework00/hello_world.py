@@ -1,2 +1,6 @@
+"""This function is used to print message"""
+
+
 def text():
-    return message
+    """This is a function"""
+    return "message"
