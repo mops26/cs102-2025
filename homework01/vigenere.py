@@ -9,13 +9,13 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     'LXFOPVEFRNHR'
     """
     ciphertext = ""
-    keyword = keyword.upper()
     key_length = len(keyword)
-    key_index = 0
+    keyword = keyword.upper()
+    multiplier = len(plaintext) //  key_length + 1
+    new_key = keyword * multiplier
 
-    for char in plaintext:
+    for char, key_char in zip(plaintext, new_key):
         if char.isalpha():
-            key_char = keyword[key_index]
             shift = ord(key_char) - ord('A')
             if char.isupper():
                 new_char_code = ord(char) + shift
@@ -27,11 +27,9 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
                 if new_char_code > ord('z'):
                     new_char_code -= 26
                 ciphertext += chr(new_char_code)
-            key_index += 1
-            if key_index == key_length:
-                key_index = 0
         else:
             ciphertext += char
+
     return ciphertext
 
 
@@ -46,14 +44,13 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-
-    keyword = keyword.upper()
     key_length = len(keyword)
-    key_index = 0
+    keyword = keyword.upper()
+    multiplier = len(ciphertext) // key_length + 1
+    new_key = keyword * multiplier
 
-    for char in ciphertext:
+    for char, key_char in zip(ciphertext, new_key):
         if char.isalpha():
-            key_char = keyword[key_index]
             shift = ord(key_char) - ord('A')
             if char.isupper():
                 new_char_code = ord(char) - shift
@@ -65,9 +62,6 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
                 if new_char_code < ord('a'):
                     new_char_code += 26
                 plaintext += chr(new_char_code)
-            key_index += 1
-            if key_index == key_length:
-                key_index = 0
         else:
             plaintext += char
 
