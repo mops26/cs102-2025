@@ -225,7 +225,7 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     if N >= 81:
         return solved
     if N < 0:
-        return [['.' for _ in range(9)] for _ in range(9)]
+        return [["." for _ in range(9)] for _ in range(9)]
     puzzle = [row[:] for row in solved]
     cells_to_remove = 81 - N
     all_positions = [(r, c) for r in range(9) for c in range(9)]
