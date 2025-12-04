@@ -10,13 +10,15 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     >>> encrypt_caesar("")
     ''
     """
+    first_up, last_up = ord("A"), ord("Z")
+    first_low, last_low = ord("a"), ord("z")
     ciphertext = ""
     for char in plaintext:
         if char.isalpha():
             if char.isupper():
-                first, last = ord("A"), ord("Z")
+                first, last = first_up, last_up
             else:
-                first, last = ord("a"), ord("z")
+                first, last = first_low, last_low
 
             new_code = ord(char) + shift
 
@@ -44,13 +46,15 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     >>> decrypt_caesar("")
     ''
     """
+    first_up, last_up = ord("A"), ord("Z")
+    first_low, last_low = ord("a"), ord("z")
     plaintext = ""
     for char in ciphertext:
         if char.isalpha():
             if char.isupper():
-                first, last = ord("A"), ord("Z")
+                first, last = first_up, last_up
             else:
-                first, last = ord("a"), ord("z")
+                first, last = first_low, last_low
             new_code = ord(char) - shift
             if new_code > last:
                 new_code -= 26
